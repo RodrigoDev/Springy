@@ -52,9 +52,9 @@
 
 /// Configurações para todos os ambientes
 $conf = [
-    'template_engine'        => 'smarty',
-    'debug'                  => false,
-    'auto_reload'            => false,
+    'template_engine'        => 'twig',
+    'debug'                  => true,
+    'auto_reload'            => true,
     'strict_variables'       => true,
     'autoescape'             => false,
     'optimizations'          => 1,

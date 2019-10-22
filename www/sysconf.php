@@ -14,7 +14,7 @@ $GLOBALS['SYSTEM'] = [
     'CHARSET'           => 'UTF-8',
     'TIMEZONE'          => 'America/Sao_Paulo',
 
-    'ACTIVE_ENVIRONMENT'   => '',
+    'ACTIVE_ENVIRONMENT'   => 'development',
     'ENVIRONMENT_VARIABLE' => 'SPRINGY_ENVIRONMENT',
     'CONSIDER_PORT_NUMBER' => false,
     'ENVIRONMENT_ALIAS'    => [

@@ -129,8 +129,7 @@ class DB
                     'PDO' => new \PDO(
                         $conf['database_type'].':host='.$conf['host_name'].';dbname='.$conf['database'],
                         $conf['user_name'],
-                        $conf['password'],
-                        $pdoConf
+                        $conf['password']
                     ),
                     'dbName' => $database,
                 ];

@@ -19,10 +19,6 @@ class Index_Controller extends Controller
     {
         $date = date('F j, Y');
 
-        Springy\Kernel::debug('Exemplo de debug 1');
-        Springy\Kernel::debug('Exemplo de debug 2', 'Exemplo com título');
-        Springy\Kernel::debug('Exemplo de debug 3', 'Título do Exemplo 3', false, false);
-
         $tpl = $this->_template();
         $tpl->assign('date', $date);
         $tpl->display();
