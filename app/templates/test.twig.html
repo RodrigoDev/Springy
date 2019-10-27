@@ -1,37 +1,114 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+        <script
+                src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous"></script>
 
         <title>MedPortal</title>
     </head>
     <body>
         <div class="container">
-            <h1>My List</h1>
-            {{ date }}
+            <h1>Test</h1>
         </div>
         <div class="container">
-        <table id="myTable" class="table table-hover">
+            <div class="text-right">
+                <button href="#myModal" id="openBtn" data-toggle="modal" class="btn btn-success">New</button>
+            </div>
+            <table id="myTable" class="table table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
                         <th>Created at</th>
                         <th>Updated at</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for r in data %}
                     <tr>
-                        <td>{{ r.id }}</td>
-                        <td>{{ r.name }}</td>
+                        <td class="data-id">{{ r.id }}</td>
+                        <td class="data-name">{{ r.name }}</td>
                         <td>{{ r.created_at }}</td>
                         <td>{{ r.updated_at }}</td>
+                        <td>
+                            <button class="btn btn-success" data-id="{{ r.id }}" data-toggle="modal" data-target="#myModal">Edit</button>
+                            <button class="btn btn-danger delete" data-id="{{ r.id }}">Delete</button>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title text-left">Big Title</h3>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="hidden" id="mdata-id" name="id">
+                                <label for="mdata-name">Name</label>
+                                <input type="text" class="form-control" id="mdata-name" placeholder="name" name="name">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="submit-form">Save</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </body>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" ></script>
+    <script>
+        $('#myModal').on('show.bs.modal', function (e) {
+            var _button = $(e.relatedTarget);
+
+            var _row = _button.parents("tr");
+            var _id = _row.find(".data-id").text();
+            var _name = _row.find(".data-name").text();
+
+            $(this).find("#mdata-id").val(_id);
+            $(this).find("#mdata-name").val(_name);
+        });
+
+        $('#submit-form').on('click', function (e) {
+            $.ajax({
+                url: "test/create",
+                type: "POST",
+                data: $('form').serialize(),
+
+                success: function(data){
+                    console.log(data);
+                    location.reload();
+                }
+            });
+        });
+
+        $('.delete').on('click', function (e) {
+            $.ajax({
+                url: "test/delete",
+                type: "POST",
+                data: "id="+$(this).data('id'),
+
+                success: function(data){
+                    console.log(data);
+                    location.reload();
+                }
+            });
+        });
+
+    </script>
 </html>

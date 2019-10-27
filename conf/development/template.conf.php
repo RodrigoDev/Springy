@@ -24,7 +24,7 @@
 $conf = [
     'debug'          => true,
     'debugging_ctrl' => 'URL',
-    'auto_reload'    => false,
+    'auto_reload'    => true,
 ];
 
 /**@}*/

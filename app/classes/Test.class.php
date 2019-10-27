@@ -14,4 +14,14 @@ class Test extends Model
     protected $deletedColumn = 'deleted';
     /// Columns who can be updated by application
     protected $writableColumns = ['name'];
+
+    public function parseData(array $data)
+    {
+        foreach($data as $key => $value)
+        {
+            if (in_array($key, $this->writableColumns)) {
+                $this->$key = $value;
+            }
+        }
+    }
 }
